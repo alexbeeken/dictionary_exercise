@@ -1,5 +1,7 @@
 require('rspec')
 require('term')
+require('word')
+require('definition')
 
 describe(Term) do
   before() do
@@ -24,6 +26,13 @@ describe(Term) do
     it("will retrieve the definition value in Term") do
       new_term = Term.new("carrot", ["A delicious vegetable.", "The first ingredient in my favorite cake."])
       expect(new_term.look_up_definition()).to(eq(["A delicious vegetable.", "The first ingredient in my favorite cake."]))
+    end
+  end
+
+  describe("#look_up_definition") do
+    it("will retrieve the definition value in Term") do
+      new_term = Term.new(["carrot", "celery"], "vegetables")
+      expect(new_term.look_up_definition()).to(eq("vegetables"))
     end
   end
 
@@ -96,12 +105,36 @@ describe(Term) do
       expect(Term.search_word("carrot")).to(eq(new_term1))
     end
   end
+end
 
-  describe("#look_up_definition") do
-    it("will retrieve the definition value in Term") do
-      new_term = Term.new(["carrot", "celery"], "vegetables")
-      expect(new_term.look_up_definition()).to(eq("vegetables"))
+describe(Word) do
+  describe('#get_word') do
+    it('returns the word of a word') do
+      test_word = Word.new('hat', 'english')
+      expect(test_word.get_word()).to(eq('hat'))
     end
   end
 
+  describe('#get_language') do
+    it('returns the language of a word') do
+      test_language = Word.new('hat', 'english')
+      expect(test_language.get_language()).to(eq('english'))
+    end
+  end
+end
+
+describe(Definition) do
+  describe('#get_definition') do
+    it('returns the definition of a defintion') do
+      test_definition = Definition.new('es uno numero', 'spanish')
+      expect(test_definition.get_definition()).to(eq('es uno numero'))
+    end
+  end
+
+  describe('#get_language') do
+    it('returns the languae of a definition') do
+      test_definition = Definition.new('es uno numero', 'spanish')
+      expect(test_definition.get_language()).to(eq('spanish'))
+    end
+  end
 end

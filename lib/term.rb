@@ -4,6 +4,7 @@ class Term
   define_method(:initialize) do |word, definition|
     @word = word
     @definition = definition
+    @id = @@dictionary.length().+(1)
   end
 
   define_method(:look_up_word) do
@@ -12,6 +13,10 @@ class Term
 
   define_method(:look_up_definition) do
     @definition
+  end
+
+  define_method(:id) do
+    @id
   end
 
   define_method(:save) do
@@ -46,8 +51,13 @@ class Term
     @@dictionary = []
   end
 
-
-
+  define_singleton_method(:find) do |id|
+    @@dictionary.each() do |dictionaries|
+      if dictionaries.id() == id
+        return dictionaries
+      end
+    end
+  end
 end
 
 # output = ("#{@word}: #{@definition}")
