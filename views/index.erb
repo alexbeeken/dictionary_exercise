@@ -1,0 +1,30 @@
+
+
+    <h1>Create your own dictionary!</h1>
+
+    <h3>Make some words up!</h3>
+
+    <h2> Dictionary </h2>
+
+    <% if @terms != nil %>
+
+    <% @terms.each() do |term| %>
+
+      <%= term.look_up_word().get_word() %> <%= "-" %>
+
+      <%= term.look_up_definition().get_definition() %>
+
+       <a href="/words/<%= term.id() %>"> Add more</a>
+
+    <br>
+
+    <% end %>
+
+    <% end %>
+
+    <form action='/add_a_word' method="post">
+      <input type="text" id="word" name="word" placeholder="enter a word">
+      <input type="text" id="definition" name="definition" placeholder="enter a definition">
+      <input type="text" id="language" name="language" placeholder="enter the language">
+      <button type="submit" id="submit">Add</button>
+    </form>
